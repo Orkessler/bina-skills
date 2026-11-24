@@ -1,0 +1,376 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>סרטון לוואטסאפ</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap">
+<style>/* Brand frame shared by every בינה והשכל tool: deep navy ground, green signal, Rubik.
+   Layout: one centered column, header → tool → contact band. */
+:root{
+  --bg:#0F2140; --card:#1A3358; --card-2:#23436F; --line:#2E4A74;
+  --fg:#FFFFFF; --muted:#A9B8CF; --soft:#D6DEEA;
+  --green:#14A06B; --green-2:#3DDC97; --green-deep:#0E7C55; --warn:#F2B84B;
+  --font:"Rubik","Heebo","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.55;margin:0;direction:rtl}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.brand{display:flex;align-items:center;gap:14px;padding-block:6px 22px}
+.brand svg{width:64px;height:auto;flex:none}
+.brand .nm{font-weight:800;font-size:1.45rem;line-height:1.1}
+.brand .tg{color:var(--muted);font-size:.85rem}
+.brand .tg b{color:var(--green-2);font-weight:700}
+h1{font-size:clamp(1.6rem,4.5vw,2.3rem);line-height:1.15;margin:0 0 8px;text-wrap:balance}
+h2{font-size:1.3rem;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--soft);margin:0 0 22px;max-width:62ch}
+.panel{background:var(--card);border-radius:18px;padding:22px}
+label{display:block;font-weight:600;margin:14px 0 6px}
+.hint{color:var(--muted);font-size:.85rem;font-weight:400}
+input[type=text],input[type=number],textarea,select{width:100%;background:var(--bg);color:var(--fg);border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font:inherit}
+textarea{min-height:84px;resize:vertical}
+input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible,.chip:focus-visible{outline:2px solid var(--green-2);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:transparent;color:var(--soft);border-radius:999px;padding:7px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:12px 22px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--green);color:#fff}
+.btn.ghost{background:transparent;color:var(--soft);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:14px;flex-wrap:wrap}.row>*{flex:1 1 220px;min-width:0}
+.cta{margin-top:34px;background:linear-gradient(0deg,var(--green-deep),var(--green-deep));border-radius:18px;padding:20px 22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.cta .t{flex:1 1 260px;min-width:0}
+.cta .t b{display:block;font-size:1.15rem}
+.cta .t span{color:#D9F5E8;font-size:.92rem}
+.cta .num{direction:ltr;unicode-bidi:isolate;user-select:all;font-weight:700}
+.cta .btn{background:#fff;color:var(--green-deep)}
+.foot{color:var(--muted);font-size:.8rem;text-align:center;margin-top:16px}
+.note{background:var(--card-2);border-radius:12px;padding:10px 14px;color:var(--soft);font-size:.9rem}
+.note.warn{border-inline-start:0;background:#3A3420;color:#F7E3B0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;align-items:start}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.pick{display:flex;gap:10px;flex-wrap:wrap}
+.pick label.btn{margin:0;font-weight:700}
+.pick input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;margin-top:12px}
+.thumbs div{aspect-ratio:1;border-radius:8px;background:var(--bg) center/cover no-repeat;position:relative;overflow:hidden}
+.thumbs div.vid::after{content:"▶";position:absolute;inset:auto 4px 2px auto;font-size:.75rem;color:#fff;text-shadow:0 0 3px #000}
+.thumbs div.bad{outline:2px solid var(--warn)}
+.thumbs div.out{opacity:.35}
+.thumbs .rm{position:absolute;top:3px;inset-inline-end:3px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.7);color:#fff;font:700 15px/1 var(--font);cursor:pointer;display:grid;place-items:center;padding:0}
+.thumbs .rm:hover{background:#C0392B}
+@media (pointer:coarse){.thumbs{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:8px}.thumbs .rm{width:36px;height:36px;font-size:18px}}
+@media (max-width:600px){.wrap{padding-block:12px 28px}.panel{padding:16px}.brand{padding-block:4px 14px}.brand svg{width:48px}.phone{max-width:300px;margin-inline:auto}.actions .btn,.pick .btn{flex:1 1 100%}input[type=text]{font-size:16px}}
+.meta{color:var(--muted);font-size:.85rem;margin-top:8px}
+.styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.style{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:transparent;color:var(--fg);font:inherit;text-align:right;cursor:pointer}
+.style small{display:block;color:var(--muted);font-size:.8rem}
+.style[aria-pressed=true]{border-color:var(--green-2);background:rgba(61,220,151,.12)}
+.logoRow{display:flex;gap:12px;align-items:center}
+.logoPrev{width:56px;height:56px;border-radius:10px;background:var(--bg) center/contain no-repeat;border:1.5px dashed var(--line);flex:none}
+.phone{background:#050B16;border-radius:30px;padding:10px;border:2px solid var(--line)}
+.phone canvas,.phone video{width:100%;aspect-ratio:9/16;display:block;border-radius:22px;background:#000}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;width:0;background:var(--green-2);transition:width .2s}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+#status{margin-top:10px;min-height:1.4em}
+</style>
+
+<div class="wrap">
+  <header class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="20 58 406 256"> <g fill="none" stroke="#3DDC97" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"> <polyline points="400,240 330,170 278,212 152,86"/> <polyline points="150,162 145,82 225,87"/> </g> <path d="M88,182 C92.466,227.24 100.76,235.534 146,240 C100.76,244.466 92.466,252.76 88,298 C83.534,252.76 75.24,244.466 30,240 C75.24,235.534 83.534,227.24 88,182Z" fill="#FFFFFF"/> <path d="M170,264 C171.54,279.6 174.4,282.46 190,284 C174.4,285.54 171.54,288.4 170,304 C168.46,288.4 165.6,285.54 150,284 C165.6,282.46 168.46,279.6 170,264Z" fill="#FFFFFF"/> <path d="M52,124 C53.232,136.48 55.52,138.768 68,140 C55.52,141.232 53.232,143.52 52,156 C50.768,143.52 48.48,141.232 36,140 C48.48,138.768 50.768,136.48 52,124Z" fill="#FFFFFF"/> </svg><div><div class="nm">בינה והשכל</div><div class="tg">הטמעת כלי <b>AI</b> בעסקים</div></div></header>
+
+  <h1>סרטון לוואטסאפ מהתמונות שלכם</h1>
+  <p class="lead">בוחרים תמונות וסרטונים, מוסיפים שם עסק, לוגו ומוזיקה, ומקבלים סרטון של עד 15 שניות, מוכן לסטטוס.</p>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>1. התמונות והסרטונים</h2>
+      <div class="pick">
+        <label class="btn primary" id="folderBtn" for="folder">בחירת תיקייה</label>
+        <input type="file" id="folder" webkitdirectory directory multiple>
+        <label class="btn ghost" id="filesBtn" for="files">בחירת קבצים</label>
+        <input type="file" id="files" accept="image/*,video/*" multiple>
+        <button type="button" class="btn ghost" id="clear" hidden>ניקוי הכל</button>
+      </div>
+      <div class="meta" id="count">עדיין לא נבחרו קבצים.</div>
+      <div class="thumbs" id="thumbs"></div>
+      <p class="hint" id="thumbHint" hidden>לחיצה על ✕ מסירה קובץ מהסרטון. אפשר להוסיף עוד קבצים בכל שלב.</p>
+
+      <h2 style="margin-top:26px">2. העסק</h2>
+      <label for="name">שם העסק</label>
+      <input type="text" id="name" placeholder="לדוגמה: דפוס השלום" maxlength="40">
+      <label for="line">שורה נוספת <span class="hint">לא חובה. מבצע, טלפון או סיסמה</span></label>
+      <input type="text" id="line" placeholder="לדוגמה: מבצע חנוכה! 20% הנחה" maxlength="50">
+      <label for="logo">לוגו העסק <span class="hint">עדיף PNG בלי רקע</span></label>
+      <div class="logoRow"><div class="logoPrev" id="logoPrev"></div><input type="file" id="logo" accept="image/*"></div>
+
+      <h2 style="margin-top:26px">3. מוזיקה</h2>
+      <div class="styles" id="styles" role="group" aria-label="סגנון מוזיקה"></div>
+      <div class="actions"><button type="button" class="btn ghost" id="listen">השמעת דוגמה</button></div>
+    </div>
+
+    <div>
+      <div class="phone"><canvas id="cv" width="720" height="1280" aria-label="תצוגה מקדימה של הסרטון"></canvas><video id="out" controls playsinline hidden></video></div>
+      <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+      <div id="status" class="hint" role="status" aria-live="polite"></div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="make" disabled>יצירת הסרטון</button>
+        <button type="button" class="btn primary" id="share" hidden>שיתוף לוואטסאפ</button>
+        <button type="button" class="btn ghost" id="save" hidden>הורדת הסרטון</button>
+      </div>
+      <p class="hint" id="fmtNote"></p>
+      <div class="note" id="howto" hidden><b>איך מעלים לסטטוס:</b><br>אנדרואיד: וואטסאפ ← עדכונים ← סמל המצלמה ← בוחרים את הסרטון מהגלריה.<br>אייפון: הסרטון נשמר באפליקציית "קבצים". פותחים אותו ← שיתוף ← "שמירת וידאו", ואז בוואטסאפ ← עדכונים ← + ← בוחרים את הסרטון.<br>מחשב: שולחים את הקובץ לעצמכם בוואטסאפ ומעלים מהטלפון.</div>
+    </div>
+  </div>
+
+  <aside class="cta">
+    <div class="t"><b>רוצים להטמיע כלי AI בעסק שלכם?</b><span>צרו קשר עם יעקב מבינה והשכל · <span class="num">058-392-8918</span></span></div>
+    <a class="btn" href="https://wa.me/972583928918?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%99%D7%A2%D7%A7%D7%91.%20%D7%90%D7%A0%D7%99%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%94%D7%98%D7%9E%D7%99%D7%A2%20%D7%9B%D7%9C%D7%99%20ai%20%D7%91%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener">שלחו הודעה בוואטסאפ</a>
+  </aside>
+  <p class="foot">בינה והשכל · הטמעת כלי AI בעסקים · הקבצים שלכם לא יוצאים מהמכשיר</p>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const W=720,H=1280,FPS=30,MAX=15,END=2,FADE=0.35;
+  const cv=$("cv"),ctx=cv.getContext("2d");
+  const STYLES=[
+    {id:"calm",t:"רגוע",d:"פסנתר רך ואיטי"},
+    {id:"upbeat",t:"קצבי",d:"תופים ובס, אנרגטי"},
+    {id:"festive",t:"חגיגי",d:"פעמונים ומחיאות כפיים"},
+    {id:"none",t:"בלי מוזיקה",d:"סרטון שקט"}];
+  let style="upbeat",items=[],logoImg=null,blob=null,ext="mp4",downloads=null;
+
+  // Hosted on claude.ai the page saves through the downloads capability; elsewhere a normal link works.
+  if(window.claude&&claude.use){claude.use("downloads").then(d=>{downloads=d;}).catch(()=>{});}
+
+  // ---------- inputs ----------
+  function styleButtons(){
+    $("styles").innerHTML="";
+    STYLES.forEach(s=>{const b=document.createElement("button");b.type="button";b.className="style";b.setAttribute("aria-pressed",s.id===style);
+      const t=document.createElement("span");t.textContent=s.t;const d=document.createElement("small");d.textContent=s.d;b.append(t,d);
+      b.onclick=()=>{style=s.id;styleButtons();$("listen").disabled=style==="none";};$("styles").appendChild(b);});
+  }
+  // pool = every file the person added (they can remove any); items = what fits in 15 seconds.
+  let pool=[],badCount=0,skipped=0;
+  async function loadFiles(list){
+    const files=[...list].filter(f=>/^(image|video)\//.test(f.type)||/\.(jpe?g|png|webp|gif|heic|mp4|mov|m4v|webm)$/i.test(f.name))
+      .sort((a,b)=>(a.webkitRelativePath||a.name).localeCompare(b.webkitRelativePath||b.name,"he",{numeric:true}));
+    if(!files.length){if(!pool.length)$("count").textContent="לא נמצאו תמונות או סרטונים שהדפדפן יודע לפתוח.";return;}
+    $("count").textContent="טוענים את הקבצים…";
+    for(const f of files){
+      if(pool.length>=40){skipped++;continue;}
+      if(pool.some(p=>p.file.name===f.name&&p.file.size===f.size))continue;
+      const isVid=/^video\//.test(f.type)||/\.(mp4|mov|m4v|webm)$/i.test(f.name);
+      const it={file:f,kind:isVid?"video":"image",url:URL.createObjectURL(f)};
+      try{
+        if(isVid){
+          const v=document.createElement("video");v.muted=true;v.playsInline=true;v.preload="auto";v.src=it.url;
+          await new Promise((res,rej)=>{v.onloadeddata=res;v.onerror=rej;setTimeout(rej,8000);});
+          it.el=v;it.base=Math.min(6,Math.max(1.5,v.duration||3));it.w=v.videoWidth;it.h=v.videoHeight;
+          const c=document.createElement("canvas");c.width=96;c.height=96;cover(c.getContext("2d"),v,96,96,1);it.thumb=c.toDataURL();
+        }else{
+          const im=new Image();im.src=it.url;await im.decode();it.el=im;it.w=im.naturalWidth;it.h=im.naturalHeight;it.base=3;it.thumb=it.url;
+        }
+        pool.push(it);
+      }catch(e){badCount++;URL.revokeObjectURL(it.url);}
+    }
+    refresh();
+  }
+  function removeItem(it){pool=pool.filter(p=>p!==it);if(it.el&&it.el.pause)it.el.pause();URL.revokeObjectURL(it.url);refresh();}
+  function refresh(){
+    pool.forEach(p=>p.dur=p.base);items=pool.slice();plan();
+    if(blob){blob=null;$("save").hidden=true;$("share").hidden=true;$("howto").hidden=true;$("out").hidden=true;cv.hidden=false;$("make").textContent="יצירת הסרטון";$("status").textContent="הקבצים השתנו. צרו את הסרטון מחדש.";}
+    $("thumbs").innerHTML="";
+    pool.forEach(it=>{
+      const th=document.createElement("div");th.style.backgroundImage=`url(${it.thumb})`;th.title=it.file.name;
+      if(it.kind==="video")th.classList.add("vid");
+      if(!items.includes(it)){th.classList.add("out");th.title+=" · לא נכנס ל-15 השניות";}
+      const b=document.createElement("button");b.type="button";b.className="rm";b.textContent="✕";b.setAttribute("aria-label","הסרת "+it.file.name);b.onclick=()=>removeItem(it);
+      th.appendChild(b);$("thumbs").appendChild(th);
+    });
+    const parts=[];
+    parts.push(items.length?`${items.length} קבצים · הסרטון יהיה באורך ${Math.round(total())} שניות`:"עדיין לא נבחרו קבצים.");
+    if(pool.length>items.length)parts.push(`${pool.length-items.length} לא נכנסו ל-15 השניות (מסומנים בחיוור, אפשר להסיר אחרים)`);
+    if(badCount)parts.push(`${badCount} קבצים לא נתמכו (למשל HEIC של אייפון: פתחו ב-Safari או המירו ל-JPG)`);
+    if(skipped)parts.push("אפשר עד 40 קבצים");
+    $("count").textContent=parts.join(" · ");
+    $("thumbHint").hidden=!pool.length;$("clear").hidden=!pool.length;
+    ready();drawFrame(0);
+  }
+  // Durations: photos share what is left of the 15 seconds, between 1.5 and 3 seconds each.
+  function plan(){
+    const vids=items.filter(i=>i.kind==="video"),imgs=items.filter(i=>i.kind==="image");
+    let vt=vids.reduce((a,i)=>a+i.dur,0);const room=MAX-END;
+    if(vt>room*0.7){const k=room*0.7/vt;vids.forEach(i=>i.dur=Math.max(1.5,i.dur*k));vt=vids.reduce((a,i)=>a+i.dur,0);}
+    const per=imgs.length?Math.max(1.5,Math.min(3,(room-vt)/imgs.length)):0;imgs.forEach(i=>i.dur=per);
+    let t=0;items=items.filter(i=>{if(t+i.dur>room+0.01)return false;i.start=t;t+=i.dur;return true;});
+  }
+  const total=()=>items.reduce((a,i)=>a+i.dur,0)+END;
+  function ready(){$("make").disabled=!(items.length&&$("name").value.trim());}
+
+  // ---------- drawing ----------
+  function cover(c,src,w,h,zoom){const sw=src.videoWidth||src.naturalWidth,sh=src.videoHeight||src.naturalHeight;if(!sw)return;const s=Math.max(w/sw,h/sh)*zoom;const dw=sw*s,dh=sh*s;c.drawImage(src,(w-dw)/2,(h-dh)/2,dw,dh);}
+  function contain(c,src,w,h){const sw=src.videoWidth||src.naturalWidth,sh=src.videoHeight||src.naturalHeight;const s=Math.min(w/sw,h/sh);const dw=sw*s,dh=sh*s;c.drawImage(src,(w-dw)/2,(h-dh)/2,dw,dh);}
+  function drawItem(it,local){
+    const wide=it.w>it.h*1.1;const zoom=it.kind==="image"?1+0.06*(local/it.dur):1;
+    if(wide){ctx.save();try{ctx.filter="blur(28px) brightness(.6)";}catch(e){}cover(ctx,it.el,W,H,1.15);ctx.restore();ctx.filter="none";
+      ctx.save();ctx.translate(W/2,H/2);ctx.scale(zoom,zoom);ctx.translate(-W/2,-H/2);contain(ctx,it.el,W,H);ctx.restore();}
+    else cover(ctx,it.el,W,H,zoom);
+  }
+  function overlay(alpha){
+    const name=$("name").value.trim(),line=$("line").value.trim();
+    const g=ctx.createLinearGradient(0,H*0.62,0,H);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,.78)");ctx.fillStyle=g;ctx.fillRect(0,H*0.62,W,H*0.38);
+    ctx.globalAlpha=alpha;ctx.direction="rtl";ctx.textAlign="center";ctx.fillStyle="#fff";
+    if(line){ctx.font="600 40px Rubik, Arial";wrap(line,W/2,H*0.74,W-100,48);}
+    ctx.font="800 62px Rubik, Arial";wrap(name,W/2,H*0.835,W-80,70);
+    if(logoImg){const lw=Math.min(190,190*logoImg.naturalWidth/logoImg.naturalHeight),lh=lw*logoImg.naturalHeight/logoImg.naturalWidth;
+      drawLogo((W-lw)/2,H*0.1,lw,lh);}
+    ctx.globalAlpha=1;
+  }
+  // A plate behind the logo that contrasts with it: light plate for dark logos, navy for light ones.
+  let logoPlate="#FFFFFF";
+  function measureLogo(im){try{const c=document.createElement("canvas");c.width=c.height=48;const g=c.getContext("2d");g.drawImage(im,0,0,48,48);const d=g.getImageData(0,0,48,48).data;let sum=0,n=0;
+    for(let i=0;i<d.length;i+=4){if(d[i+3]<128)continue;sum+=0.2126*d[i]+0.7152*d[i+1]+0.0722*d[i+2];n++;}logoPlate=n&&sum/n>170?"#0F2140":"#FFFFFF";}catch(e){logoPlate="#FFFFFF";}}
+  function drawLogo(x,y,w,h){const p=Math.max(14,w*0.09);ctx.save();ctx.shadowColor="rgba(0,0,0,.35)";ctx.shadowBlur=18;ctx.fillStyle=logoPlate;
+    ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x-p,y-p,w+2*p,h+2*p,22);else ctx.rect(x-p,y-p,w+2*p,h+2*p);ctx.fill();ctx.restore();ctx.drawImage(logoImg,x,y,w,h);}
+  function wrap(text,x,y,maxW,lh){const words=text.split(/\s+/);let line="",lines=[];for(const w of words){const t=line?line+" "+w:w;if(ctx.measureText(t).width>maxW&&line){lines.push(line);line=w;}else line=t;}lines.push(line);lines=lines.slice(0,2);
+    lines.forEach((l,i)=>{ctx.lineWidth=6;ctx.strokeStyle="rgba(0,0,0,.35)";ctx.strokeText(l,x,y+i*lh-(lines.length-1)*lh);ctx.fillText(l,x,y+i*lh-(lines.length-1)*lh);});}
+  function endCard(local){
+    const a=Math.min(1,local/0.5);ctx.fillStyle="#0F2140";ctx.globalAlpha=a;ctx.fillRect(0,0,W,H);
+    if(logoImg){const lw=Math.min(380,380*logoImg.naturalWidth/logoImg.naturalHeight),lh=lw*logoImg.naturalHeight/logoImg.naturalWidth;drawLogo((W-lw)/2,H*0.42-lh/2,lw,lh);}
+    ctx.direction="rtl";ctx.textAlign="center";ctx.fillStyle="#fff";ctx.font="800 64px Rubik, Arial";wrap($("name").value.trim(),W/2,logoImg?H*0.62:H*0.5,W-80,72);
+    const line=$("line").value.trim();if(line){ctx.fillStyle="#3DDC97";ctx.font="600 40px Rubik, Arial";wrap(line,W/2,logoImg?H*0.69:H*0.58,W-100,48);}
+    ctx.globalAlpha=1;
+  }
+  function drawFrame(t){
+    ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
+    if(!items.length){ctx.fillStyle="#0F2140";ctx.fillRect(0,0,W,H);ctx.fillStyle="#A9B8CF";ctx.font="500 36px Rubik, Arial";ctx.direction="rtl";ctx.textAlign="center";ctx.fillText("התצוגה המקדימה תופיע כאן",W/2,H/2);overlay(1);return;}
+    const body=total()-END;
+    if(t>=body){const last=items[items.length-1];drawItem(last,last.dur);overlay(1);endCard(t-body);return;}
+    const i=items.findIndex(it=>t>=it.start&&t<it.start+it.dur);const it=items[Math.max(0,i)];const local=t-it.start;
+    drawItem(it,local);
+    const nx=items[i+1];if(nx&&local>it.dur-FADE){ctx.globalAlpha=(local-(it.dur-FADE))/FADE;drawItem(nx,0);ctx.globalAlpha=1;}
+    overlay(Math.min(1,t/0.6));
+  }
+
+  // ---------- music: generated in the browser, so there is nothing to license ----------
+  function music(ac,dest,len){
+    const out=ac.createGain();out.connect(dest);out.gain.setValueAtTime(0.0001,ac.currentTime);
+    const t0=ac.currentTime+0.05;out.gain.exponentialRampToValueAtTime(0.9,t0+0.6);out.gain.setValueAtTime(0.9,t0+len-2);out.gain.linearRampToValueAtTime(0.0001,t0+len);
+    const comp=ac.createDynamicsCompressor();comp.connect(out);
+    const S={calm:{bpm:72,prog:[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],bass:true,drums:false,arp:"slow",wave:"triangle",bright:.25},
+             upbeat:{bpm:112,prog:[[57,60,64],[53,57,60],[48,52,55],[55,59,62]],bass:true,drums:"pop",arp:"eighth",wave:"square",bright:.12},
+             festive:{bpm:124,prog:[[48,52,55],[53,57,60],[55,59,62],[48,52,55]],bass:true,drums:"clap",arp:"bell",wave:"sine",bright:.3}}[style];
+    const beat=60/S.bpm,bar=beat*4,f=m=>440*Math.pow(2,(m-69)/12);
+    let noise=ac.createBuffer(1,ac.sampleRate*0.5,ac.sampleRate);const nd=noise.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+    const tone=(m,t,d,type,vol,dest2)=>{const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f(m);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+d);o.connect(g);g.connect(dest2||comp);o.start(t);o.stop(t+d+0.05);};
+    const lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=style==="upbeat"?2200:3200;lp.connect(comp);
+    const hit=(t,kind)=>{
+      if(kind==="kick"){const o=ac.createOscillator(),g=ac.createGain();o.frequency.setValueAtTime(140,t);o.frequency.exponentialRampToValueAtTime(45,t+0.12);g.gain.setValueAtTime(0.9,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.25);o.connect(g);g.connect(comp);o.start(t);o.stop(t+0.3);}
+      else{const s=ac.createBufferSource();s.buffer=noise;const hp=ac.createBiquadFilter();hp.type=kind==="hat"?"highpass":"bandpass";hp.frequency.value=kind==="hat"?7000:1500;const g=ac.createGain();const d=kind==="hat"?0.05:0.15;g.gain.setValueAtTime(kind==="hat"?0.18:0.5,t);g.gain.exponentialRampToValueAtTime(0.001,t+d);s.connect(hp);hp.connect(g);g.connect(comp);s.start(t);s.stop(t+d+0.02);}
+    };
+    for(let b=0,t=t0;t<t0+len;b++,t+=bar){
+      const ch=S.prog[b%4];
+      ch.forEach(m=>tone(m,t,bar*0.98,style==="calm"?"sine":"triangle",style==="calm"?0.09:0.05,lp));
+      if(S.bass)for(let k=0;k<(style==="calm"?1:4);k++)tone(ch[0]-12,t+k*beat*(style==="calm"?4:1),style==="calm"?bar*.95:beat*.8,"sine",0.22);
+      if(S.arp==="slow")ch.concat(ch[0]+12).forEach((m,k)=>tone(m+12,t+k*beat,beat*1.8,"sine",0.06));
+      if(S.arp==="eighth")for(let k=0;k<8;k++)tone(ch[k%3]+12,t+k*beat/2,beat*0.4,"square",0.025,lp);
+      if(S.arp==="bell")for(let k=0;k<4;k++){tone(ch[k%3]+24,t+k*beat,beat*1.5,"sine",0.07);tone(ch[k%3]+36,t+k*beat,beat*0.6,"sine",0.02);}
+      if(S.drums)for(let k=0;k<4;k++){const bt=t+k*beat;if(k%2===0||style==="festive")hit(bt,"kick");if(k%2===1)hit(bt,"snare");hit(bt+beat/2,"hat");hit(bt,"hat");}
+    }
+    return t0;
+  }
+  let previewAc=null;
+  $("listen").onclick=async()=>{
+    if(previewAc){previewAc.close();previewAc=null;$("listen").textContent="השמעת דוגמה";return;}
+    previewAc=new (window.AudioContext||window.webkitAudioContext)();await previewAc.resume();music(previewAc,previewAc.destination,8);
+    $("listen").textContent="עצירה";setTimeout(()=>{if(previewAc){previewAc.close();previewAc=null;$("listen").textContent="השמעת דוגמה";}},8200);
+  };
+
+  // ---------- render ----------
+  function pickType(){
+    const c=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4;codecs="avc1.42E01E, mp4a.40.2"','video/mp4;codecs=avc1.4D401F,mp4a.40.2','video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9,opus','video/webm'];
+    for(const t of c)if(window.MediaRecorder&&MediaRecorder.isTypeSupported(t))return t;return "";
+  }
+  async function make(){
+    const type=pickType();
+    if(!cv.captureStream||!type){$("status").textContent="הדפדפן הזה לא יודע להקליט וידאו. נסו Chrome או Safari מעודכנים במחשב.";return;}
+    ext=type.includes("mp4")?"mp4":"webm";
+    $("fmtNote").textContent=ext==="webm"?"הדפדפן הזה שומר בפורמט WebM, שוואטסאפ לא תמיד מקבל. לסרטון MP4 השתמשו ב-Chrome מעודכן או ב-Safari.":"";
+    $("make").disabled=true;$("save").hidden=true;$("share").hidden=true;$("howto").hidden=true;$("out").hidden=true;cv.hidden=false;blob=null;
+    try{await document.fonts.load("800 62px Rubik");}catch(e){}
+    const len=total();
+    let wl=null;try{if(navigator.wakeLock)wl=await navigator.wakeLock.request("screen");}catch(e){}
+    const ac=new (window.AudioContext||window.webkitAudioContext)();await ac.resume();
+    const dest=ac.createMediaStreamDestination();
+    const stream=cv.captureStream(FPS);
+    if(style!=="none"){music(ac,dest,len);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));}
+    const rec=new MediaRecorder(stream,{mimeType:type,videoBitsPerSecond:5_000_000,audioBitsPerSecond:128_000});
+    const chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+    const done=new Promise(r=>rec.onstop=r);
+    rec.start(250);
+    const t0=performance.now();let playing=null;
+    await new Promise(resolve=>{
+      const tick=()=>{
+        const t=(performance.now()-t0)/1000;
+        const it=items.find(x=>t>=x.start&&t<x.start+x.dur);
+        if(it&&it.kind==="video"&&playing!==it){if(playing&&playing.el)playing.el.pause();playing=it;it.el.currentTime=0;it.el.play().catch(()=>{});}
+        drawFrame(Math.min(t,len-0.001));
+        $("bar").style.width=Math.min(100,t/len*100)+"%";
+        $("status").textContent=`יוצרים את הסרטון… ${Math.min(Math.round(t),Math.round(len))} מתוך ${Math.round(len)} שניות. השאירו את הדף פתוח והמסך דלוק.`;
+        if(t>=len){resolve();return;}
+        requestAnimationFrame(tick);
+      };requestAnimationFrame(tick);
+    });
+    if(playing&&playing.el)playing.el.pause();
+    rec.stop();await done;ac.close();try{wl&&wl.release();}catch(e){}
+    blob=new Blob(chunks,{type:type.split(";")[0]});
+    const v=$("out");v.src=URL.createObjectURL(blob);v.hidden=false;cv.hidden=true;
+    $("status").textContent=`הסרטון מוכן: ${Math.round(len)} שניות, ${(blob.size/1048576).toFixed(1)}MB. בדקו אותו, ואז שתפו או שמרו.`;
+    $("save").hidden=false;$("share").hidden=false;$("make").disabled=false;$("make").textContent="יצירה מחדש";
+  }
+  $("make").onclick=()=>make().catch(e=>{$("status").textContent="משהו השתבש ביצירת הסרטון. נסו שוב, או עם פחות קבצים.";$("make").disabled=false;});
+  async function save(){
+    if(!blob)return;
+    $("howto").hidden=false;
+    const fname=(($("name").value.trim()||"video").replace(/[\\/:*?"<>|]+/g," ").trim()+" - וואטסאפ."+ext);
+    if(downloads){try{await downloads.save({filename:fname,data:blob});$("status").textContent="נשמר. עכשיו אפשר להעלות לסטטוס.";}catch(e){$("status").textContent=e&&e.code==="declined"?"ההורדה בוטלה.":"לא הצלחנו לשמור את הקובץ כאן. נסו שוב בעוד רגע.";}return;}
+    // A page opened from a downloaded file cannot name its downloads, so use the save dialog where the browser has one.
+    if(location.protocol==="file:"&&window.showSaveFilePicker){
+      try{const h=await showSaveFilePicker({suggestedName:fname,types:[{description:"סרטון",accept:{[blob.type||"video/mp4"]:["."+ext]}}]});const w=await h.createWritable();await w.write(blob);await w.close();$("status").textContent="נשמר. עכשיו אפשר להעלות לסטטוס.";return;}
+      catch(e){if(e&&e.name==="AbortError"){$("status").textContent="השמירה בוטלה.";return;}}
+    }
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=fname;document.body.appendChild(a);a.click();a.remove();
+  }
+  $("save").onclick=save;
+  // Share straight to WhatsApp where the browser allows it; claude.ai's frame blocks it, so fall back to saving with instructions.
+  $("share").onclick=async()=>{
+    if(!blob)return;
+    try{
+      const f=new File([blob],($("name").value.trim()||"video").replace(/[\\/:*?"<>|]+/g," ").trim()+"."+ext,{type:blob.type});
+      if(navigator.canShare&&navigator.canShare({files:[f]})){
+        await navigator.share({files:[f],title:$("name").value.trim()});
+        $("status").textContent="נשלח. בוואטסאפ בחרו \"הסטטוס שלי\".";return;
+      }
+    }catch(e){if(e&&e.name==="AbortError")return;}
+    $("status").textContent="השיתוף הישיר לא זמין כאן, אז שומרים את הסרטון. ההוראות מופיעות למטה.";
+    await save();
+  };
+
+  $("folder").onchange=e=>{const l=[...e.target.files];e.target.value="";loadFiles(l);};
+  $("files").onchange=e=>{const l=[...e.target.files];e.target.value="";loadFiles(l);};
+  $("clear").onclick=()=>{pool.forEach(p=>URL.revokeObjectURL(p.url));pool=[];badCount=0;skipped=0;refresh();};
+  // On phones folder picking does not work: show only the files button, as the main one.
+  if(matchMedia("(pointer:coarse)").matches){$("folderBtn").hidden=true;$("filesBtn").className="btn primary";}
+  $("logo").onchange=async e=>{const f=e.target.files[0];if(!f)return;const im=new Image();im.src=URL.createObjectURL(f);try{await im.decode();logoImg=im;measureLogo(im);$("logoPrev").style.backgroundImage=`url(${im.src})`;}catch(err){logoImg=null;}drawFrame(0);};
+  ["name","line"].forEach(id=>$(id).addEventListener("input",()=>{ready();if(!blob)drawFrame(0);}));
+  styleButtons();
+  document.fonts&&document.fonts.ready.then(()=>drawFrame(0));drawFrame(0);
+})();
+</script>
+
+</body></html>
