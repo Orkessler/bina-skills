@@ -188,16 +188,17 @@ input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible,.ch
       try{
         if(isVid){
           const v=await loadClip(f);
-          it.el=v;it.base=Math.min(6,Math.max(1.5,v.duration||3));it.w=v.videoWidth;it.h=v.videoHeight;it.thumb=thumbOf(v);
+          it.el=v;it.base=Math.min(6,Math.max(1.5,v.duration||3));it.w=v.videoWidth;it.h=v.videoHeight;it.thumb=thumbOf(v);it.url=v.src;
         }else{
-          const im=await loadPicture(f);it.el=im;it.w=im.naturalWidth;it.h=im.naturalHeight;it.base=3;it.thumb=thumbOf(im);
+          const im=await loadPicture(f);it.el=im;it.w=im.naturalWidth;it.h=im.naturalHeight;it.base=3;it.thumb=thumbOf(im);it.url=im.src;
         }
         pool.push(it);
       }catch(e){badCount++;if(/\.heic$/i.test(f.name))heicCount++;}
     }
     refresh();
   }
-  function removeItem(it){pool=pool.filter(p=>p!==it);if(it.el&&it.el.pause)it.el.pause();URL.revokeObjectURL(it.url);refresh();}
+  function freeURL(u){if(typeof u==="string"&&u.startsWith("blob:")){try{URL.revokeObjectURL(u);}catch(e){}}}
+  function removeItem(it){pool=pool.filter(p=>p!==it);try{if(it.el&&it.el.pause)it.el.pause();}catch(e){}freeURL(it.url);refresh();}
   function refresh(){
     pool.forEach(p=>p.dur=p.base);items=pool.slice();plan();
     if(blob){blob=null;$("save").hidden=true;$("share").hidden=true;$("howto").hidden=true;$("out").hidden=true;cv.hidden=false;$("make").textContent="יצירת הסרטון";$("status").textContent="הקבצים השתנו. צרו את הסרטון מחדש.";}
@@ -380,7 +381,7 @@ input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible,.ch
 
   $("folder").onchange=e=>{const l=[...e.target.files];e.target.value="";loadFiles(l);};
   $("files").onchange=e=>{const l=[...e.target.files];e.target.value="";loadFiles(l);};
-  $("clear").onclick=()=>{pool.forEach(p=>URL.revokeObjectURL(p.url));pool=[];badCount=0;heicCount=0;skipped=0;refresh();};
+  $("clear").onclick=()=>{pool.forEach(p=>{try{if(p.el&&p.el.pause)p.el.pause();}catch(e){}freeURL(p.url);});pool=[];badCount=0;heicCount=0;skipped=0;refresh();};
   // On phones folder picking does not work: show only the files button, as the main one.
   if(matchMedia("(pointer:coarse)").matches){$("folderBtn").hidden=true;$("filesBtn").className="btn primary";}
   $("logo").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{logoImg=await loadPicture(f);measureLogo(logoImg);const c=document.createElement("canvas");c.width=c.height=112;const g=c.getContext("2d");const k=Math.min(112/logoImg.naturalWidth,112/logoImg.naturalHeight);g.drawImage(logoImg,(112-logoImg.naturalWidth*k)/2,(112-logoImg.naturalHeight*k)/2,logoImg.naturalWidth*k,logoImg.naturalHeight*k);$("logoPrev").replaceChildren(c);}catch(err){logoImg=null;$("logoPrev").replaceChildren();$("status").textContent="הלוגו לא נפתח. נסו קובץ PNG או JPG.";}drawFrame(0);};
